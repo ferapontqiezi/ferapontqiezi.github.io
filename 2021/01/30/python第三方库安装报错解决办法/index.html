@@ -20,18 +20,26 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"ture","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="世间万物，唯代码美食，不能辜负。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ferapont的个人博客">
-<meta property="og:url" content="http://example.com/archives/2021/01/index.html">
+  <meta name="description" content="两种可能原因pip版本不够新安装第三方库的时候pycharm报以下错误：  我们可以在pycharm中的文件-设置-解释器（Interpreter）中看看pip的版本是不是最新的，如果不是最新的可以进行更新（update） 如果像上图一样已经更新到最新版本，那我们可以用cmd窗口直接输入命令行来看看原因。 pip速度不够输入命令行pip install qypt5，产生报错：1. socket.t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python第三方库安装报错解决办法">
+<meta property="og:url" content="http://example.com/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/index.html">
 <meta property="og:site_name" content="Ferapont的个人博客">
-<meta property="og:description" content="世间万物，唯代码美食，不能辜负。">
+<meta property="og:description" content="两种可能原因pip版本不够新安装第三方库的时候pycharm报以下错误：  我们可以在pycharm中的文件-设置-解释器（Interpreter）中看看pip的版本是不是最新的，如果不是最新的可以进行更新（update） 如果像上图一样已经更新到最新版本，那我们可以用cmd窗口直接输入命令行来看看原因。 pip速度不够输入命令行pip install qypt5，产生报错：1. socket.t">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/0.png">
+<meta property="og:image" content="http://example.com/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/4.png">
+<meta property="og:image" content="http://example.com/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/1.png">
+<meta property="og:image" content="http://example.com/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/2.png">
+<meta property="og:image" content="http://example.com/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/3.png">
+<meta property="article:published_time" content="2021-01-29T22:01:05.000Z">
+<meta property="article:modified_time" content="2021-01-29T15:32:35.498Z">
 <meta property="article:author" content="Ferapont Cheung">
-<meta property="article:tag" content="数字">
+<meta property="article:tag" content="配置, 报错">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/0.png">
 
-<link rel="canonical" href="http://example.com/archives/2021/01/">
+<link rel="canonical" href="http://example.com/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -39,12 +47,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Ferapont的个人博客</title>
+  <title>python第三方库安装报错解决办法 | Ferapont的个人博客</title>
   
 
 
@@ -153,90 +161,133 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 3 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+      <meta itemprop="name" content="Ferapont Cheung">
+      <meta itemprop="description" content="世间万物，唯代码美食，不能辜负。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ferapont的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python第三方库安装报错解决办法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-29 22:01:05 / 修改时间：15:32:35" itemprop="dateCreated datePublished" datetime="2021-01-29T22:01:05Z">2021-01-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-29T22:01:05Z"
-              content="2021-01-29">
-          01-29
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" itemprop="url">
-            <span itemprop="name">python第三方库安装报错解决办法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-26T17:54:50Z"
-              content="2021-01-26">
-          01-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/27/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" itemprop="url">
-            <span itemprop="name">我的第一篇博客</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-26T09:50:58Z"
-              content="2021-01-26">
-          01-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/26/hello-world/" itemprop="url">
-            <span itemprop="name">Hello World</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        <h1 id="两种可能原因"><a href="#两种可能原因" class="headerlink" title="两种可能原因"></a>两种可能原因</h1><h2 id="pip版本不够新"><a href="#pip版本不够新" class="headerlink" title="pip版本不够新"></a>pip版本不够新</h2><p>安装第三方库的时候pycharm报以下错误：</p>
+<p><img src="/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/0.png" alt></p>
+<p>我们可以在pycharm中的文件-设置-解释器（Interpreter）中看看pip的版本是不是最新的，如果不是最新的可以进行更新（update）<img src="/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/4.png" alt></p>
+<p>如果像上图一样已经更新到最新版本，那我们可以用cmd窗口直接输入命令行来看看原因。</p>
+<h2 id="pip速度不够"><a href="#pip速度不够" class="headerlink" title="pip速度不够"></a>pip速度不够</h2><p>输入命令行pip install qypt5，产生报错：1. socket.timeout: The read operation timed out</p>
+<p><img src="/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/1.png" alt></p>
+<ol>
+<li>pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=’files.pythonhosted.org’, port=443): Read timed out.</li>
+</ol>
+<p><img src="/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/2.png" alt></p>
+<p>发生这两种异常（exceptions）的原因是读取时间超时，可见速度5.5kB/s，下载57MB的东西要2个多小时确实有问题。面对这种问题，我们可以换为更强大的pypi，但是由于国外官方pypi经常被墙，导致不可用，所以我们最好是将自己使用的pip源更换一下，这样就能解决被墙导致的装不上库的烦恼。常见的镜像网站：</p>
+<ol>
+<li><p>清华大学：<a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a> </p>
+</li>
+<li><p>阿里云：<a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a></p>
+</li>
+<li><p>中国科技大学 <a target="_blank" rel="noopener" href="https://pypi.mirrors.ustc.edu.cn/simple/">https://pypi.mirrors.ustc.edu.cn/simple/</a> </p>
+</li>
+<li><p>华中科技大学：<a target="_blank" rel="noopener" href="http://pypi.hustunique.com">http://pypi.hustunique.com</a></p>
+</li>
+<li><p>山东理工大学：<a target="_blank" rel="noopener" href="http://pypi.sdutlinux.org/">http://pypi.sdutlinux.org/</a> </p>
+</li>
+<li><p>豆瓣：<a target="_blank" rel="noopener" href="http://pypi.douban.com/simple/">http://pypi.douban.com/simple/</a></p>
+</li>
+</ol>
+<p>命令行指令输入</p>
+<p><code>pip --default-timeout=100 install 库名称 -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com</code></p>
+<p>可见速度变快了许多，迅速下载完成。</p>
+<p><img src="/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/3.png" alt></p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+	  
+	  <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        
+      </div>
+	  
+	  <div>
+        
+        
+        
+	  </div>
+	  
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%85%8D%E7%BD%AE-%E6%8A%A5%E9%94%99/" rel="tag"># 配置, 报错</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/27/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" rel="prev" title="我的第一篇博客">
+      <i class="fa fa-chevron-left"></i> 我的第一篇博客
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -290,6 +341,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E5%8F%AF%E8%83%BD%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">两种可能原因</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pip%E7%89%88%E6%9C%AC%E4%B8%8D%E5%A4%9F%E6%96%B0"><span class="nav-number">1.1.</span> <span class="nav-text">pip版本不够新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pip%E9%80%9F%E5%BA%A6%E4%B8%8D%E5%A4%9F"><span class="nav-number">1.2.</span> <span class="nav-text">pip速度不够</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
