@@ -160,6 +160,129 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/26/Hill/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+      <meta itemprop="name" content="Ferapont Cheung">
+      <meta itemprop="description" content="世间万物，唯代码美食，不能辜负。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ferapont的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/26/Hill/" class="post-title-link" itemprop="url">Hill Cypher Decode</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-26 00:44:51" itemprop="dateCreated datePublished" datetime="2021-04-26T00:44:51Z">2021-04-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-18 12:14:00" itemprop="dateModified" datetime="2021-08-18T12:14:00Z">2021-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Cryptology/" itemprop="url" rel="index"><span itemprop="name">Cryptology</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Hill-Cypher-Matrix"><a href="#Hill-Cypher-Matrix" class="headerlink" title="Hill Cypher Matrix"></a>Hill Cypher Matrix</h1><h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description:"></a>Problem Description:</h2><p>Assuming that we get plaintext encoded by 3-order Hill Cypher System “wednesdayafternoon” and corresponding cyphertext “UXKQUHGKFDVQRJMOZQ”, try to analyze the key.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution:"></a>Solution:</h2><p>Here is The Theory of Hill Cypher.</p>
+<p><img src="/2021/04/26/Hill/3.png" alt></p>
+<p>In addition, 3-order Hill Cypher means that the Hill Matrix’order is 3.<br>We can easily think about linear matrix arithmetic, which is the core of Hill Cypher.</p>
+<ol>
+<li>Translate the letters into relative numbers.</li>
+</ol>
+<p>Here is the table of the letter and related number.<br><img src="/2021/04/26/Hill/1.png" alt><br>We can translate the plaintext into numbers:<br>P: 22 04 03|13 04 18|03 00 24|00 05 19|04 17 13|14 14 13<br>and cyphertext into numbers:<br>C: 20 23 10|16 20 07|06 10 05|03 21 16|17 09 12|14 25 16 </p>
+<ol>
+<li>Select the 3rd, 4th and 6th group from plaintext.<br>It is |03 00 24|00 05 19|14 14 13|.</li>
+</ol>
+<script type="math/tex; mode=display">
+P=
+\left[
+\begin{matrix}
+3 & 0 & 24 \\
+0 & 5 & 19 \\
+14& 14& 13
+\end{matrix} \right]
+\tag{1}</script><ol>
+<li>Select the 3rd, 4th and 6th group from cyphertext.<br>It is |06 10 05|03 21 16|14 25 16|.</li>
+</ol>
+<script type="math/tex; mode=display">
+C=
+\left[
+\begin{matrix}
+6 & 10 & 5  \\
+3 & 21 & 16 \\
+14& 25 & 16 
+\end{matrix} \right]
+\tag{2}</script><ol>
+<li><p>Get answer from formula(1) and (2).</p>
+<script type="math/tex; mode=display">
+M=
+\left[
+\begin{matrix}
+4 & 14 & 17 \\
+23 & 24 & 12 \\
+16 & 3 & 10 
+\end{matrix} \right]
+\tag{3}</script></li>
+<li><p>Examine the answer in another 3 groups.</p>
+</li>
+</ol>
+<p>We find the answer suits the another 3 groups all, which verifies that the answer is correct.</p>
+<p>Here is SageNotebook Code in Jupyter.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plaintext=matrix(IntegerModRing(<span class="number">26</span>),<span class="number">3</span>,<span class="number">3</span>,[<span class="number">3</span>,<span class="number">0</span>,<span class="number">24</span>, <span class="number">0</span>,<span class="number">5</span>,<span class="number">19</span>, <span class="number">14</span>,<span class="number">14</span>,<span class="number">13</span>])</span><br><span class="line">cyphertext=matrix(IntegerModRing(<span class="number">26</span>),<span class="number">3</span>,<span class="number">3</span>,[<span class="number">6</span>,<span class="number">10</span>,<span class="number">5</span>, <span class="number">3</span>,<span class="number">21</span>,<span class="number">16</span>, <span class="number">14</span>,<span class="number">25</span>,<span class="number">16</span>])</span><br><span class="line">key=plaintext \ cyphertext</span><br><span class="line">key</span><br></pre></td></tr></table></figure>
+<p>Here is the result of code running.</p>
+<p><img src="/2021/04/26/Hill/2.png" alt></p>
+<p>That’s all. Thanks for reading.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/30/python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -600,7 +723,7 @@ $$ {test}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

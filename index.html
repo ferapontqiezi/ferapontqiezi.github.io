@@ -160,6 +160,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/16/202012-2%E6%9C%9F%E6%9C%AB%E9%A2%84%E6%B5%8B%E4%B9%8B%E6%9C%80%E4%BD%B3%E9%98%88%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+      <meta itemprop="name" content="Ferapont Cheung">
+      <meta itemprop="description" content="世间万物，唯代码美食，不能辜负。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ferapont的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/16/202012-2%E6%9C%9F%E6%9C%AB%E9%A2%84%E6%B5%8B%E4%B9%8B%E6%9C%80%E4%BD%B3%E9%98%88%E5%80%BC/" class="post-title-link" itemprop="url">202012-2期末预测之最佳阈值</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-16 11:55:09 / 修改时间：04:29:10" itemprop="dateCreated datePublished" datetime="2021-09-16T11:55:09Z">2021-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csp/" itemprop="url" rel="index"><span itemprop="name">csp</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="前缀和和后缀和"><a href="#前缀和和后缀和" class="headerlink" title="前缀和和后缀和"></a>前缀和和后缀和</h1><p>关于一维前缀和，可以参考<a target="_blank" rel="noopener" href="https://www.acwing.com/solution/content/27238/">该链接</a>。</p>
+<p>关于二位前缀和，可以参考我的上一篇博客<a target="_blank" rel="noopener" href="https://ferapontqiezi.github.io/2021/08/19/202104-2%E9%A2%86%E5%9F%9F%E5%9D%87%E5%80%BC/">202104-2领域均值</a></p>
+<p>我尝试暴力无果后，想到了前缀和后缀和能解决该问题。该题需要两个数组分别维护前缀和后缀和。</p>
+<ul>
+<li><code>pre</code>数组维护前<code>i</code>个学生<code>flag==0</code>的数量</li>
+<li><code>suf</code>数组维护从第<code>i</code>个学生到最后一个学生<code>flag==1</code>的数量</li>
+</ul>
+<p>这样我们要的结果就等价于<code>pre[i-1]+suf[i]</code>，我们用<code>ans</code>存储最大的预测正确次数，<code>t</code>存储预测的阈值就可以完成该道题。</p>
+<p>P.S. 这里为了偷懒，直接用了头文件的<code>sort()</code>函数，第三个参数<code>cmp</code>是比较两个数据的优先规则，这里是<code>y</code>越小排越前面.</p>
+<p>P.S.S 为了简化运算，这里用了<code>if(a[i].y!=a[i-1].y)</code>，只有前后的<code>y</code>不相同的时候，我们才开始计算，这样每次的<code>a[i].y</code>都是<code>y</code>相同中<code>i</code>最小的那一个进行计算，避免重复计算。</p>
+<p>P.S.S.S 为了解决【多个不同<code>t</code>都能达到最大的预测正确次数】的问题，这里用了<code>if(pre[i-1]+suf[i]&gt;=ans)</code>如果<code>=</code>成立，正好是【多个不同<code>t</code>都能达到最大的预测正确次数】的问题，我们取较大的<code>t</code>，所以<code>t=max(ti)</code>。又因<code>t</code>又是<code>a[i].y</code>赋值过去的，<code>a[i].y</code>是排序好了的，所以我们直接<code>t=a[i].y</code>，达到了取等时，用较大<code>t</code>的目的。</p>
+<h1 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h1><p>时间复杂度为$O(m)$,m是第一行参数——人数m。</p>
+<p>空间复杂度为$O(3N)=O(N)$,N是我们数组开辟空间大小，题目说明100%数据的m都比10^5小，所以也为O(m_max)。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> h=<span class="number">3</span>,ki=<span class="number">149</span>,mo=<span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> y,flag;</span><br><span class="line">&#125;a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a,node b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.y&lt;b.y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> m,pre[N],suf[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a[i].y&gt;&gt;a[i].flag;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(a+<span class="number">1</span>,a+m+<span class="number">1</span>,cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++) pre[i]=pre[i<span class="number">-1</span>]+(a[i].flag==<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=m;i&gt;=<span class="number">1</span>;i--) suf[i]=suf[i+<span class="number">1</span>]+(a[i].flag==<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> t=<span class="number">0</span>,ans=-mo; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">1</span>||a[i].y!=a[i<span class="number">-1</span>].y)&#123;</span><br><span class="line">            <span class="keyword">if</span>(pre[i<span class="number">-1</span>]+suf[i]&gt;=ans)&#123;</span><br><span class="line">                ans=pre[i<span class="number">-1</span>]+suf[i];</span><br><span class="line">                t=a[i].y;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;t&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终满分通过。</p>
+<p><img src="/2021/09/16/202012-2%E6%9C%9F%E6%9C%AB%E9%A2%84%E6%B5%8B%E4%B9%8B%E6%9C%80%E4%BD%B3%E9%98%88%E5%80%BC/res.png" alt="res"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/202009-2%E9%A3%8E%E9%99%A9%E4%BA%BA%E7%BE%A4%E7%AD%9B%E6%9F%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -878,129 +961,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/26/Hill/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile_photo.jpg">
-      <meta itemprop="name" content="Ferapont Cheung">
-      <meta itemprop="description" content="世间万物，唯代码美食，不能辜负。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ferapont的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/26/Hill/" class="post-title-link" itemprop="url">Hill Cypher Decode</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-26 00:44:51" itemprop="dateCreated datePublished" datetime="2021-04-26T00:44:51Z">2021-04-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-18 12:14:00" itemprop="dateModified" datetime="2021-08-18T12:14:00Z">2021-08-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Cryptology/" itemprop="url" rel="index"><span itemprop="name">Cryptology</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Hill-Cypher-Matrix"><a href="#Hill-Cypher-Matrix" class="headerlink" title="Hill Cypher Matrix"></a>Hill Cypher Matrix</h1><h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description:"></a>Problem Description:</h2><p>Assuming that we get plaintext encoded by 3-order Hill Cypher System “wednesdayafternoon” and corresponding cyphertext “UXKQUHGKFDVQRJMOZQ”, try to analyze the key.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution:"></a>Solution:</h2><p>Here is The Theory of Hill Cypher.</p>
-<p><img src="/2021/04/26/Hill/3.png" alt></p>
-<p>In addition, 3-order Hill Cypher means that the Hill Matrix’order is 3.<br>We can easily think about linear matrix arithmetic, which is the core of Hill Cypher.</p>
-<ol>
-<li>Translate the letters into relative numbers.</li>
-</ol>
-<p>Here is the table of the letter and related number.<br><img src="/2021/04/26/Hill/1.png" alt><br>We can translate the plaintext into numbers:<br>P: 22 04 03|13 04 18|03 00 24|00 05 19|04 17 13|14 14 13<br>and cyphertext into numbers:<br>C: 20 23 10|16 20 07|06 10 05|03 21 16|17 09 12|14 25 16 </p>
-<ol>
-<li>Select the 3rd, 4th and 6th group from plaintext.<br>It is |03 00 24|00 05 19|14 14 13|.</li>
-</ol>
-<script type="math/tex; mode=display">
-P=
-\left[
-\begin{matrix}
-3 & 0 & 24 \\
-0 & 5 & 19 \\
-14& 14& 13
-\end{matrix} \right]
-\tag{1}</script><ol>
-<li>Select the 3rd, 4th and 6th group from cyphertext.<br>It is |06 10 05|03 21 16|14 25 16|.</li>
-</ol>
-<script type="math/tex; mode=display">
-C=
-\left[
-\begin{matrix}
-6 & 10 & 5  \\
-3 & 21 & 16 \\
-14& 25 & 16 
-\end{matrix} \right]
-\tag{2}</script><ol>
-<li><p>Get answer from formula(1) and (2).</p>
-<script type="math/tex; mode=display">
-M=
-\left[
-\begin{matrix}
-4 & 14 & 17 \\
-23 & 24 & 12 \\
-16 & 3 & 10 
-\end{matrix} \right]
-\tag{3}</script></li>
-<li><p>Examine the answer in another 3 groups.</p>
-</li>
-</ol>
-<p>We find the answer suits the another 3 groups all, which verifies that the answer is correct.</p>
-<p>Here is SageNotebook Code in Jupyter.</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plaintext=matrix(IntegerModRing(<span class="number">26</span>),<span class="number">3</span>,<span class="number">3</span>,[<span class="number">3</span>,<span class="number">0</span>,<span class="number">24</span>, <span class="number">0</span>,<span class="number">5</span>,<span class="number">19</span>, <span class="number">14</span>,<span class="number">14</span>,<span class="number">13</span>])</span><br><span class="line">cyphertext=matrix(IntegerModRing(<span class="number">26</span>),<span class="number">3</span>,<span class="number">3</span>,[<span class="number">6</span>,<span class="number">10</span>,<span class="number">5</span>, <span class="number">3</span>,<span class="number">21</span>,<span class="number">16</span>, <span class="number">14</span>,<span class="number">25</span>,<span class="number">16</span>])</span><br><span class="line">key=plaintext \ cyphertext</span><br><span class="line">key</span><br></pre></td></tr></table></figure>
-<p>Here is the result of code running.</p>
-<p><img src="/2021/04/26/Hill/2.png" alt></p>
-<p>That’s all. Thanks for reading.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1073,7 +1033,7 @@ M=
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
