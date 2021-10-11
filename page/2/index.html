@@ -160,6 +160,194 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/15/HashSet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+      <meta itemprop="name" content="Ferapont Cheung">
+      <meta itemprop="description" content="世间万物，唯代码美食，不能辜负。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ferapont的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/15/HashSet/" class="post-title-link" itemprop="url">Hash</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-14 16:15:59" itemprop="dateCreated datePublished" datetime="2021-08-14T16:15:59Z">2021-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 08:34:17" itemprop="dateModified" datetime="2021-08-19T08:34:17Z">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h2><h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>不使用任何内建的哈希表库设计一个哈希集合（HashSet）。</p>
+<p>实现 <code>MyHashSet</code> 类：</p>
+<ul>
+<li><p><code>void add(key)</code> 向哈希集合中插入值 <code>key</code> 。</p>
+</li>
+<li><p><code>bool contains(key)</code> 返回哈希集合中是否存在这个值<code>key</code> 。</p>
+</li>
+<li><code>void remove(key</code>) 将给定值<code>key</code> 从哈希集合中删除。如果哈希集合中没有这个值，什么也不做。</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><img src="/2021/08/15/HashSet/1.png" alt></p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>解决哈希表冲突的主要方法如下：</p>
+<ul>
+<li>链地址法：为每个哈希值维护一个链表，并将具有相同哈希值的元素都放入这一链表当中。</li>
+<li>开放地址法：当发现哈希值 $h$ 处产生冲突时，根据某种策略，从 $h$ 出发找到下一个不冲突的位置。例如，一种最简单的策略是，不断地检查$ h+1,h+2,h+3,\ldots$ 这些整数对应的位置。</li>
+<li>再哈希法：当发现哈希冲突后，使用另一个哈希函数产生一个新的地址。</li>
+</ul>
+<p>我们选择链地址法，基数$base$选为$521$，正好在七夕节$/doge$。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHashSet</span> &#123;</span></span><br><span class="line"><span class="comment">//链地址法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;&gt; data;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> base = <span class="number">521</span>;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> key % base;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    MyHashSet() : data(base) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> h = hash(key);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = data[h].begin(); it != data[h].end(); ++it)&#123;</span><br><span class="line">            <span class="keyword">if</span> ((*it) == key) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        data[h].push_back(key);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> h = hash(key);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = data[h].begin(); it != data[h].end(); ++it)&#123;</span><br><span class="line">            <span class="keyword">if</span> ((*it) == key) &#123;</span><br><span class="line">                data[h].erase(it);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns true if this set contains the specified element */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">contains</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> h = hash(key);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = data[h].begin(); it != data[h].end(); ++it) &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;(*it);</span><br><span class="line">            <span class="keyword">if</span> ((*it) == key) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MyHashSet object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * MyHashSet* obj = new MyHashSet();</span></span><br><span class="line"><span class="comment"> * obj-&gt;add(key);</span></span><br><span class="line"><span class="comment"> * obj-&gt;remove(key);</span></span><br><span class="line"><span class="comment"> * bool param_3 = obj-&gt;contains(key);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><p>不使用任何内建的哈希表库设计一个哈希映射（HashMap）。</p>
+<p>实现 <code>MyHashMap</code> 类：</p>
+<ul>
+<li><code>MyHashMap()</code> 用空映射初始化对象</li>
+<li><code>void put(int key, int value)</code> 向 <code>HashMap</code> 插入一个键值对 <code>(key, value)</code> 。如果 <code>key</code>已经存在于映射中，则更新其对应的值 <code>value</code> 。</li>
+<li><code>int get(int key)</code> 返回特定的<code>key</code> 所映射的<code>value</code> ；如果映射中不包含<code>key</code>的映射，返回 $-1 $。<br><code>void remove(key)</code>如果映射中存在<code>key</code> 的映射，则移除 <code>key</code> 和它所对应的 <code>value</code> 。</li>
+</ul>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p><img src="/2021/08/15/HashSet/2.png" alt></p>
+<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>承接上文的<code>HashSet</code>，「设计哈希映射」与「设计哈希集合」解法接近，唯一的区别在于我们存储的不是 $\textit{key}$ 本身，而是$ (\textit{key}, \textit{value})$ 对。可以用$pair<int,int>$存储键对值。</int,int></p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHashMap</span> &#123;</span></span><br><span class="line"><span class="comment">//链地址法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">list</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt;&gt; data;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> base = <span class="number">521</span>;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> key % base;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    MyHashMap() : data(base) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** value will always be non-negative. */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> h = hash(key);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = data[h].begin(); it != data[h].end(); ++it)&#123;</span><br><span class="line">            <span class="keyword">if</span> ((*it).first == key) &#123;</span><br><span class="line">                (*it).second = value;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        data[h].push_back(<span class="built_in">make_pair</span>(key, value));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> h = hash(key);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = data[h].begin(); it != data[h].end(); ++it)&#123;</span><br><span class="line">            <span class="keyword">if</span> ((*it).first == key) &#123;</span><br><span class="line">                <span class="keyword">return</span> (*it).second;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Removes the mapping of the specified value key if this map contains a mapping for the key */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> h = hash(key);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = data[h].begin(); it != data[h].end(); ++it)&#123;</span><br><span class="line">            <span class="keyword">if</span> ((*it).first == key) &#123;</span><br><span class="line">                data[h].erase(it);</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MyHashMap object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * MyHashMap* obj = new MyHashMap();</span></span><br><span class="line"><span class="comment"> * obj-&gt;put(key,value);</span></span><br><span class="line"><span class="comment"> * int param_2 = obj-&gt;get(key);</span></span><br><span class="line"><span class="comment"> * obj-&gt;remove(key);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/29/%E4%BB%A3%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+      <meta itemprop="name" content="Ferapont Cheung">
+      <meta itemprop="description" content="世间万物，唯代码美食，不能辜负。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ferapont的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/29/%E4%BB%A3%E6%8D%A2/" class="post-title-link" itemprop="url">代换密码解密</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-29 14:59:31 / 修改时间：09:53:15" itemprop="dateCreated datePublished" datetime="2021-04-29T14:59:31Z">2021-04-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Cryptology/" itemprop="url" rel="index"><span itemprop="name">Cryptology</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>破译如下代换密码，要求写出对应的明文（明文用小写字母，单词间无空格和标点符号）：</p>
+<p>UNGLCKVVPGTLVDKBPNEWNLMGVMTTLTAZXKIMJMBBANTLCMOMVTNAAMILVTMCGTHMKQTLBMVCMXPIAMTLBMVGLTCKAUILEDMGPVLDHGOMIZWNLMGBZLGKSMAZBMKOMKTWNLMGBZKTLCKAMHMIMDMVGBZLXBLCSAZTBMMOMTVPGMOMVKJLTQPXCBPNEJLBBLUILVDKJKZ</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>1、分析各个字母的频率，发现M的频率最高，为29，我们可以猜测M对应的明文字母为e，$d_K(M)=e$。另外，出现频率较高（频率大于10）的是B、G、K、L、T、V，我们希望这些字母对应的是t,a,o,i,n,s,h,r的一个子集的加密，但实际的频数变化很难看出它们之间的对应关系。</p>
+<p><img src="/2021/04/29/%E4%BB%A3%E6%8D%A2/1.png" alt></p>
+<p>于是，密文变为了<br>UNGLCKVVPGTLVDKBPNEWNLeGVeTTLTAZXKIeJeBBANTLCeOeVTNAAeILVTeCGTHeKQTLBeVCeXPIAeTLBeVGLTCKAUILEDeGPVLDHGOeIZWNLeGBZLGKSeAZBeKOeKTWNLeGBZKTLCKAeHeIeDeVGBZLXBLCSAZTBeeOeTVPGeOeVKJLTQPXCBPNEJLBBLUILVDKJKZ</p>
+<p>2、注意形如”-M”或”M-“的两字母组，因为已经假设M解密成e。我们发现出现这种类型的最一般的两字母组是OM,MV(各出现5次),BM,MG(各出现4次),AM,LM,MK,MT(各出现3次),GM,SM,TM,VM,MB只出现1次,KM,ML则没有出现。因为MK出现了3次而KM没有出现过，所以猜测$d_K(K)=a$，此时密文变成了以下形式。</p>
+<p>UNGLCaVVPGTLVDaBPNEWNLeGVeTTLTAZXaIeJeBBANTLCeOeVTNAAeILVTeCGTHeaQTLBeVCeXPIAeTLBeVGLTCaAUILEDeGPVLDHGOeIZWNLeGBZLGaSeAZBeaOeaTWNLeGBZaTLCaAeHeIeDeVGBZLXBLCSAZTBeeOeTVPGeOeVaJLTQPXCBPNEJLBBLUILVDaJaZ</p>
+<p>3、注意形如”M_M”的三字母组，因为MOM出现最多(3次)，所以我们可以假定$d_K(O)=v$，即$d_K(MOM)=eve$。此时密文变为了以下形式。</p>
+<p>UNGLCaVVPGTLVDaBPNEWNLeGVeTTLTAZXaIeJeBBANTLCeveVTNAAeILVTeCGTHeaQTLBeVCeXPIAeTLBeVGLTCaAUILEDeGPVLDHGveIZWNLeGBZLGaSeAZBeaveaTWNLeGBZaTLCaAeHeIeDeVGBZLXBLCSAZTBeeveTVPGeveVaJLTQPXCBPNEJLBBLUILVDaJaZ</p>
+<p>4、如前文的猜测，$d_K(M)=e$,$d_K(K)=d$,$d_K(O)=r$。注意到密文”-AZTBeeveTVPGeveVa-“，因为”eeve”结尾的单词主要是”Peeve”(动词，恼怒),”Sleeve”(名词，袖子)，而且B,T频率很高，所以我们猜测$d_K(B)=l$,$d_K(T)=s$。同样的，密文”eveVa”中的V频率很高，除去已经解密的a,l,s, 只剩下t,o,i,n,h,r, 故猜测$d_K(V)=n$。此时密文如下</p>
+<p>UNGLCannPGsLnDalPNEWNLeGnessLsAZXaIeJellANsLCevensNAAeILnseCGsHeaQsLlenCeXPIAesLlenGLsCaAUILEDeGPnLDHGveIZWNLeGlZLGaSeAZleaveasWNLeGlZasLCaAeHeIeDenGlZLXlLCSAZsleevesnPGevenaJLsQPXClPNEJLllLUILnDaJaZ</p>
+<p>5、仿佛看到了曙光。密文中”sleeves nPG even a JLs-“猜测PG是ot，即$d_K(P)=o$,$d_K(G)=t$,此时</p>
+<p>UNtLCannotsLnDaloNEWNLetnessLsAZXaIeJellANsLCevensNAAeILnseCtsHeaQsLlenCeXoIAesLlentLsCaAUILEDetonLDHtveIZWNLetlZLtaSeAZleaveasWNLetlZasLCaAeHeIeDentlZLXlLCSAZsleevesnotevenaJLsQoXCloNEJLllLUILnDaJaZ</p>
+<p>6、所以猜出明文如下：</p>
+<p>buticannotsingaloudquietnessismyfarewellmusicevensummerinsectsHeaQsilenceformesilentiscambridgetonigHtveryquietlyitaSemyleaveasquietlyasicameHeregentlyiflicSmysleevesnotevenawisQofcloudwillibringaway</p>
+<p>7、稍加整理和Google得：</p>
+<p>But I cannot sing aloud, quietness is my farewell music.<br>Even summer insects heap  silence for me, silent is Cambridge tonight.<br>Very quietly I taKe my leave as quietly as I came here.<br>Gently if lick my sleeves not even a wisp of cloud will I bring away.</p>
+<p>即《再别康桥》中的：<br>但我不能放歌，悄悄是别离的笙箫。<br>夏虫也为我沉默，沉默是今晚的康桥！<br>悄悄的我走了，正如我悄悄的来。<br>我挥一挥衣袖，不带走一点云彩。</p>
+<p><img src="/2021/04/29/%E4%BB%A3%E6%8D%A2/2.png" alt></p>
+<p>That’s all. Thanks for reading.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/26/Hill/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -723,20 +911,20 @@ $$ {test}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
